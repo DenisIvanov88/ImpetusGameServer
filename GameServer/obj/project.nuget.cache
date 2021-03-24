@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "M6A+X+I/lZ1ls9Eh4Lp6HV89DxAuMNtoqRezFD94QQvUg8bZzFgtdeyU6HDzrOXcImWxSCkDvhqpGVYiob4bSw==",
+  "success": true,
+  "projectFilePath": "D:\\Impetus\\ImpetusGameServer\\GameServer\\GameServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Денис\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
