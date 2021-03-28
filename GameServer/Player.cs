@@ -5,6 +5,7 @@ using System.Numerics;
 
 namespace GameServer
 {
+
     class Player
     {
         public int id;
@@ -13,6 +14,9 @@ namespace GameServer
         public Vector3 position;
         public Quaternion rotation;
         public Vector3 destination;
+        private bool isMoving;
+        private float startTime;
+        private float duration = 2.5f;
 
         public float moveSpeed = 2.5f / Constants.TICKS_PER_SEC;
 
@@ -23,41 +27,67 @@ namespace GameServer
             this.position = spawnPosition;
             this.rotation = Quaternion.Identity;
 
-            destination = spawnPosition;
         }
 
         public void Update() //TODO: FIX MOVEMENT
         {
-            Vector2 inputDirection = Vector2.Zero;
-            if (destination.Y > position.Y)
+            //if (!atDestination)
+            //{
+            //    Vector2 inputDirection = Vector2.Zero;
+            //    if (destination.Y > position.Y)
+            //    {
+            //        inputDirection.Y += 1f;
+            //    }
+            //    if (destination.Y < position.Y)
+            //    {
+            //        inputDirection.Y -= 1f;
+            //    }
+            //    if (destination.X > position.X)
+            //    {
+            //        inputDirection.X += 1f;
+            //    }
+            //    if (destination.X < position.X)
+            //    {
+            //        inputDirection.X -= 1f;
+            //    }
+            //    Console.WriteLine(inputDirection);
+            //    Console.WriteLine("Destination:");
+            //    Console.WriteLine(destination);
+            //    Move(inputDirection);
+            //}
+            if (position != destination)
             {
-                inputDirection.Y += 1f;
+                isMoving = true;
+                position = Vector3.Lerp(position, destination, startTime / duration);
+                startTime += 0.001f;
+                Console.WriteLine("Walk");
+                Console.WriteLine(startTime);
+                Console.WriteLine(startTime / duration);
+                ServerSend.PlayerPosition(this);
+                ServerSend.PlayerRotation(this);
             }
-            if (destination.Y < position.Y)
+            if (position == destination)
             {
-                inputDirection.Y -= 1f;
+                isMoving = false;
+                startTime = 0f;
             }
-            if (destination.X > position.X)
-            {
-                inputDirection.X += 1f;
-            }
-            if (destination.X < position.X)
-            {
-                inputDirection.X -= 1f;
-            }
-            Console.WriteLine(inputDirection);
-            Move(inputDirection);
+
         }
 
         private void Move(Vector2 inputDirection)
         {
-            Vector3 up = Vector3.Transform(new Vector3(1, 0, 0), rotation);
-            Vector3 sideways = Vector3.Normalize(Vector3.Cross(up, new Vector3(0, 0, 1)));
+            //if (position == destination)
+            //{
+            //    atDestination = true;
 
-            Vector3 moveDirection = sideways * inputDirection.X + up * inputDirection.Y;
+            //}
+            //Vector3 up = Vector3.Transform(new Vector3(1, 0, 0), rotation);
+            //Vector3 sideways = Vector3.Normalize(Vector3.Cross(up, new Vector3(0, 0, 1)));
 
-            position += moveDirection * moveSpeed;
-            Console.WriteLine(position);
+            //Vector3 moveDirection = sideways * inputDirection.X + up * inputDirection.Y;
+
+            //position += moveDirection * moveSpeed;
+            //Console.WriteLine(position);
 
             ServerSend.PlayerPosition(this);
             ServerSend.PlayerRotation(this);
