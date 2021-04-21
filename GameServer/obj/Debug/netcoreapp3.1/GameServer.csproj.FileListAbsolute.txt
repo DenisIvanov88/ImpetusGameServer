@@ -20,7 +20,10 @@ D:\Impetus\ImpetusGameServer\GameServer\bin\Debug\netcoreapp3.1\GameServer.pdb
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.csprojAssemblyReference.cache
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.AssemblyInfoInputs.cache
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.AssemblyInfo.cs
-D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.csproj.CoreCompileInputs.cache
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.dll
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.pdb
 D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.genruntimeconfig.cache
+D:\Impetus\ImpetusGameServer\GameServer\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.csproj.CopyComplete
+D:\Impetus\ImpetusGameServer\GameServer\bin\Debug\netcoreapp3.1\BouncyCastle.Crypto.dll
+D:\Impetus\ImpetusGameServer\GameServer\obj\Debug\netcoreapp3.1\GameServer.csproj.CoreCompileInputs.cache

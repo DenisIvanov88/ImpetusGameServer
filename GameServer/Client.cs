@@ -4,11 +4,17 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Numerics;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.Threading.Tasks;
+using GameServer.Data;
 
 namespace GameServer
 {
     class Client
     {
+        private static readonly HttpClient client = new HttpClient();
+
         public static int dataBufferSize = 4096;
 
         public int id;
@@ -190,7 +196,7 @@ namespace GameServer
         public void SendIntoGame(string playerName)
         {
             player = new Player(id, playerName, new Vector3(0, 0, 0));
-
+            player.health = 100f;
             foreach (var client in Server.clients.Values)
             {
                 if (client.player != null)
@@ -209,6 +215,42 @@ namespace GameServer
                     ServerSend.SpawnPlayer(client.id, player);
                 }
             }
+        }
+        public async Task<string> Login(string username, string password)
+        {
+            string result = await LoginPorcess(username, password);
+            if (result.Contains("UserNotFound") || result.Contains("UserNotFound"))
+            {
+                Console.WriteLine("successfully failed");
+                return "fail";
+            }
+            else if (result.Contains("SuccessfulLogin"))
+            {
+                return "success";
+            }
+            Console.WriteLine(result);
+            return result;
+        }
+
+        public static async Task<string> LoginPorcess(string username, string password)
+        {
+            InputClass log = new InputClass
+            {
+                Username = username,
+                Password = password
+            };
+            var json = JsonConvert.SerializeObject(log);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var url = "https://localhost:5001/api/user/login";
+            using var client = new HttpClient();
+
+
+            var response = await client.PostAsync(url, data);
+
+            string result = response.Content.ReadAsStringAsync().Result;
+
+            return result;
         }
 
         private void Disconnect()
